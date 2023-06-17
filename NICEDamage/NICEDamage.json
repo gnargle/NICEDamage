@@ -5,9 +5,7 @@
     "Description": "Adds the message NICE to your damage flyout when you get a hit ending in 69. No that's it for real.",
     "InternalName": "NICEDamage",
     "ApplicableVersion": "any",
-    "Tags": [
-        "funny",
-        "plugin",
-        "joke"
-    ]
+    "AssemblyVersion": "Version",
+    "RepoUrl": "https://github.com/gnargle/NICEDamage",
+    "IconUrl": "https://raw.githubusercontent.com/gnargle/NICEDamage/master/NICEDamage/images/icon.png",
 }
