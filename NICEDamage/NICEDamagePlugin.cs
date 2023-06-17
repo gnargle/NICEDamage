@@ -26,9 +26,6 @@ namespace NICEDamage
             this.PluginInterface = pluginInterface;
             this.FlyTextGUI = flyTextGui;
 
-            // you might normally want to embed resources and load them from the manifest stream
-            var imagePath = Path.Combine(PluginInterface.AssemblyLocation.Directory?.FullName!, "goat.png");
-            var goatImage = this.PluginInterface.UiBuilder.LoadImage(imagePath);
             FlyTextGUI.FlyTextCreated += FlyTextGUI_FlyTextCreated;
         }
 
