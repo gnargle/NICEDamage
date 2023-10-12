@@ -7,6 +7,7 @@ using Dalamud.Game.Gui.FlyText;
 using Dalamud.Game.Text.SeStringHandling;
 using Microsoft.VisualBasic;
 using System;
+using Dalamud.Plugin.Services;
 
 namespace NICEDamage
 {
@@ -15,12 +16,12 @@ namespace NICEDamage
         public string Name => "NICE Damage Flyouts";
 
         private DalamudPluginInterface PluginInterface { get; init; }
-        private FlyTextGui FlyTextGUI { get; init; }
+        private IFlyTextGui FlyTextGUI { get; init; }
         public WindowSystem WindowSystem = new("NICEDamage");
 
         public NICEDamagePlugin(
             [RequiredVersion("1.0")] DalamudPluginInterface pluginInterface,
-             [RequiredVersion("1.0")] FlyTextGui flyTextGui)
+             [RequiredVersion("1.0")] IFlyTextGui flyTextGui)
 
         {
             this.PluginInterface = pluginInterface;
@@ -39,11 +40,6 @@ namespace NICEDamage
                 case FlyTextKind.Invulnerable:
                 case FlyTextKind.Miss:
                 case FlyTextKind.NamedDodge:
-                case FlyTextKind.NamedFullyResisted:
-                case FlyTextKind.NamedHasNoEffect:
-                case FlyTextKind.NamedIconFullyResisted:
-                case FlyTextKind.NamedIconHasNoEffect:
-                case FlyTextKind.NamedIconInvulnerable:
                 case FlyTextKind.NamedMiss:
                 case FlyTextKind.Reflect:
                 case FlyTextKind.Reflected:
