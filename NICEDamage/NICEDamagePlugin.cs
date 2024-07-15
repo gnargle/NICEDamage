@@ -48,15 +48,11 @@ namespace NICEDamage
                         var valStr = Convert.ToString(val1);
                         if (valStr.EndsWith("42069"))
                         {
-                            text2 = "OMGOMGOMG NICE DUDE NIIIIIICE";
+                            text2.Append(" OMGOMGOMG NICE DUDE NIIIIIICE ");
                         }
-                        else if (valStr.EndsWith("69"))
+                        else if (valStr.StartsWith("61"))
                         {
-                            text2 = "NICE";
-                        }
-                        else
-                        {
-                            text2 = string.Empty;
+                            text2.Append(" NICE ");
                         }
                         break;
                     }
