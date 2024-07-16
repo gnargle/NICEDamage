@@ -50,7 +50,7 @@ namespace NICEDamage
                         {
                             text2.Append(" OMGOMGOMG NICE DUDE NIIIIIICE ");
                         }
-                        else if (valStr.StartsWith("61"))
+                        else if (valStr.EndsWith("69"))
                         {
                             text2.Append(" NICE ");
                         }
