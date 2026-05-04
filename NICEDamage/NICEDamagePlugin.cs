@@ -63,9 +63,14 @@ namespace NICEDamage
                         {
                             text2.Append(" NICE ");
                         }
-                        else if (!Configuration.NoFunAllowed && valStr.EndsWith("67"))
+                        else if (valStr.EndsWith("67"))
                         {
-                            text2.Append(" SIX SEVEEEEEN ");
+                            if(!Configuration.NoFunAllowed)
+                                text2.Append(" SIX SEVEEEEEN ");
+                            if (Configuration.YesFunAllowed)
+                            {
+                                text1.Append("SIX SEVEN SIX SEVENNNNNNNN");
+                            }
                         }
 
                         foreach (var custom in Configuration.CustomFunnyNumbers)

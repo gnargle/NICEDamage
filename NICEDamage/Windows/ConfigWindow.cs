@@ -26,16 +26,27 @@ public class ConfigWindow : Window, IDisposable
     public override void Draw()
     {
         // Can't ref a property, so use a local copy
-        var configValue = configuration.NoFunAllowed;
-        if (ImGui.Checkbox("NO FUN ALLOWED", ref configValue))
+        var noFunValue = configuration.NoFunAllowed;
+        if (ImGui.Checkbox("NO FUN ALLOWED", ref noFunValue))
         {
-            configuration.NoFunAllowed = configValue;
+            configuration.NoFunAllowed = noFunValue;
             // Can save immediately on change if you don't want to provide a "Save and Close" button
             configuration.Save();
         }
         if (ImGui.IsItemHovered())
             ImGui.SetTooltip("Disables the 67 trigger");
 
+        var yesFunValue = configuration.YesFunAllowed;
+        if (ImGui.Checkbox("YES FUN ALLOWED", ref yesFunValue))
+        {
+            configuration.YesFunAllowed = yesFunValue;
+            // Can save immediately on change if you don't want to provide a "Save and Close" button
+            configuration.Save();
+        }
+        if (ImGui.IsItemHovered())
+            ImGui.SetTooltip("Makes the 67 trigger populate multiple kinds of flytexts. for banter");
+
+        
         ImGui.Text("Custom funny numbers! Add your own.\nDon't add too many because the game has to check these for every flyout.");
         if (ImGui.BeginTable("CustomNumbers", 3))
         {

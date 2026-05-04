@@ -15,7 +15,8 @@ namespace NICEDamage
     {
         public int Version { get; set; } = 0;
 
-        public bool NoFunAllowed { get; set; } = true;
+        public bool NoFunAllowed { get; set; } = false;
+        public bool YesFunAllowed { get; set; } = false;
         public List<CustomFunnyNumber> CustomFunnyNumbers { get; set; } = new();
 
         // The below exists just to make saving less cumbersome
