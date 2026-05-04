@@ -67,6 +67,14 @@ namespace NICEDamage
                         {
                             text2.Append(" SIX SEVEEEEEN ");
                         }
+
+                        foreach (var custom in Configuration.CustomFunnyNumbers)
+                        {
+                            if (valStr.EndsWith(custom.Number.ToString()))
+                            {
+                                text2.Append($" {custom.Message} ");
+                            }
+                        }
                         break;
                     }
             }
