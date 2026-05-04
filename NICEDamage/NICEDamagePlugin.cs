@@ -69,7 +69,7 @@ namespace NICEDamage
                                 text2.Append(" SIX SEVEEEEEN ");
                             if (Configuration.YesFunAllowed)
                             {
-                                text1.Append("SIX SEVEN SIX SEVENNNNNNNN");
+                                text1.Append(" SIX SEVEN SIX SEVENNNNNNNN");
                             }
                         }
 
