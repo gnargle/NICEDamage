@@ -8,6 +8,7 @@ using Dalamud.Game.Text.SeStringHandling;
 using Microsoft.VisualBasic;
 using System;
 using Dalamud.Plugin.Services;
+using NICEDamage.Windows;
 
 namespace NICEDamage
 {
@@ -15,18 +16,26 @@ namespace NICEDamage
     {
         public string Name => "NICE Damage Flyouts";
 
-        private IDalamudPluginInterface PluginInterface { get; init; }
+        [PluginService]
+        internal static IDalamudPluginInterface PluginInterface { get; private set; } = null!;
         private IFlyTextGui FlyTextGUI { get; init; }
         public WindowSystem WindowSystem = new("NICEDamage");
+        public Configuration Configuration { get; init; }
+        private ConfigWindow ConfigWindow { get; init; }
 
-        public NICEDamagePlugin(IDalamudPluginInterface pluginInterface, IFlyTextGui flyTextGui)
-
+        public NICEDamagePlugin(IFlyTextGui flyTextGui)
         {
-            this.PluginInterface = pluginInterface;
             this.FlyTextGUI = flyTextGui;
-
+            Configuration = PluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
             FlyTextGUI.FlyTextCreated += FlyTextGUI_FlyTextCreated;
+            
+            ConfigWindow = new ConfigWindow(this);
+            WindowSystem.AddWindow(ConfigWindow);
+            PluginInterface.UiBuilder.Draw += WindowSystem.Draw;
+            
+            PluginInterface.UiBuilder.OpenConfigUi += ToggleConfigUi;
         }
+        public void ToggleConfigUi() => ConfigWindow.Toggle();
 
         private void FlyTextGUI_FlyTextCreated(ref FlyTextKind kind, ref int val1, ref int val2, ref SeString text1, ref SeString text2, ref uint color, ref uint icon, ref uint damageTypeIcon, ref float yOffset, ref bool handled)
         {
@@ -54,7 +63,7 @@ namespace NICEDamage
                         {
                             text2.Append(" NICE ");
                         }
-                        else if (valStr.EndsWith("67"))
+                        else if (!Configuration.NoFunAllowed && valStr.EndsWith("67"))
                         {
                             text2.Append(" SIX SEVEEEEEN ");
                         }
@@ -66,7 +75,11 @@ namespace NICEDamage
 
         public void Dispose()
         {
+            // Unregister all actions to not leak anything during disposal of plugin
+            PluginInterface.UiBuilder.Draw -= WindowSystem.Draw;
+            PluginInterface.UiBuilder.OpenConfigUi -= ToggleConfigUi;
             this.WindowSystem.RemoveAllWindows();
+            ConfigWindow.Dispose();
         }
     }
 }

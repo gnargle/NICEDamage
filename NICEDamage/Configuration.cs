@@ -1,5 +1,4 @@
 using Dalamud.Configuration;
-using Dalamud.Plugin;
 using System;
 
 namespace NICEDamage
@@ -9,18 +8,12 @@ namespace NICEDamage
     {
         public int Version { get; set; } = 0;
 
-        // the below exist just to make saving less cumbersome
-        [NonSerialized]
-        private IDalamudPluginInterface? PluginInterface;
+        public bool NoFunAllowed { get; set; } = true;
 
-        public void Initialize(IDalamudPluginInterface pluginInterface)
-        {
-            this.PluginInterface = pluginInterface;
-        }
-
+        // The below exists just to make saving less cumbersome
         public void Save()
         {
-            this.PluginInterface!.SavePluginConfig(this);
+            NICEDamagePlugin.PluginInterface.SavePluginConfig(this);
         }
     }
 }
